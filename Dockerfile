@@ -1,7 +1,7 @@
 FROM ubuntu:22.04
 
 # Install dependencies
-RUN apt-get update && apt-get install -y wget curl git
+RUN apt-get update && apt-get install -y wget curl
 
 # Install Node.js
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
@@ -17,19 +17,23 @@ RUN rm -rf kubo kubo_v0.26.0_linux-amd64.tar.gz
 RUN ipfs init --profile=server,lowpower
 RUN ipfs config Datastore.StorageMax "5GB"
 
+# Enable IPFS API CORS
+RUN ipfs config --json API.HTTPHeaders.Access-Control-Allow-Origin '["*"]'
+RUN ipfs config --json API.HTTPHeaders.Access-Control-Allow-Methods '["GET", "POST"]'
+
 WORKDIR /app
 
-# Clone your public repository with the data
-ARG REPO_URL
-RUN git clone https://github.com/Delpho-labs/delpho_nfts.git ./data
+# Copy everything from your repo
+COPY . .
 
-# Install upload script dependencies
-RUN npm install -g ipfs-http-client
-
-# Copy upload script
-COPY ./index.js 
+# Install dependencies
+RUN npm install
 
 EXPOSE 4001 5001 8080
 
-# Start IPFS and upload
-CMD ipfs daemon & sleep 5 && node index.js && tail -f /dev/null
+# Start IPFS daemon, wait for it to be ready, run upload, then keep IPFS running
+CMD ipfs daemon & \
+    sleep 10 && \
+    node index.js && \
+    echo "✅ Upload complete! IPFS daemon running permanently..." && \
+    wait
