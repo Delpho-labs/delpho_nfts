@@ -23,9 +23,6 @@ RUN ipfs config --json API.HTTPHeaders.Access-Control-Allow-Methods '["GET", "PO
 
 WORKDIR /app
 
-# Copy everything from your repo
-COPY . .
-
 # Install dependencies
 RUN npm install
 
