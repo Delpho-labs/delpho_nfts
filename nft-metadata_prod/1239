@@ -1,0 +1,31 @@
+{
+  "description": "Delpho Prism pass.",
+  "image": "ipfs://bafybeic3hzo7ndoucwvtiblejnhr72n7essy4azxuwcmiarbdrfvu22f5y/1239.mp4",
+  "name": "Prism Pass #1239",
+  "attributes": [
+    {
+      "trait_type": "Tier",
+      "value": "Bronze"
+    },
+    {
+      "trait_type": "Rank",
+      "value": "535"
+    },
+    {
+      "trait_type": "Points",
+      "value": 936
+    },
+    {
+      "trait_type": "Referral Count",
+      "value": 6
+    },
+    {
+      "trait_type": "Wallet",
+      "value": "0x77A85041913FfF53a368DD7339a3f183c843d3A1"
+    },
+    {
+      "trait_type": "Invite Token",
+      "value": "a33b0e2ea6dd3c99"
+    }
+  ]
+}
